@@ -12,6 +12,8 @@ target/
 *.iml
 *.ipr
 .idea
+GenericPR.target
+MultithreadPR.target
 
 
 ### Eclipse ###
