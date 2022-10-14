@@ -9,21 +9,29 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Path filePath = Paths.get("joda.txt");
-        Map<String, Long> collect = Files.readAllLines(filePath)
-                .parallelStream()
-                .map(line -> line.split("[.]|[ ]|[?]|[!]|[\"]|[,]|\\n|[:]|[+]"))
-                .flatMap(Arrays::stream)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        Map<String, Long> collect = null;
         try {
-            FileWriter myWriter = new FileWriter("filename.txt");
-            myWriter.write(String.valueOf(collect));
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            collect = Files.readAllLines(filePath)
+                    .parallelStream()
+                    .map(line -> line.split("[.]|[ ]|[?]|[!]|[\"]|[,]|\\n|[:]|[+]"))
+                    .flatMap(Arrays::stream)
+                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+            try {
+                FileWriter myWriter = new FileWriter("filename.txt");
+                myWriter.write(String.valueOf(collect));
+                myWriter.close();
+                System.out.println("Successfully wrote to the file.");
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
         } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            System.out.println("File not found");
+
         }
+
     }
 }
