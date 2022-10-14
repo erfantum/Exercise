@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        Path filePath = Paths.get("joda.txt");
+        Path filePath = Paths.get("MultithreadPR/joda.txt");
         Map<String, Long> collect = null;
         try {
             collect = Files.readAllLines(filePath)
@@ -20,7 +20,7 @@ public class Main {
                     .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
             try {
-                FileWriter myWriter = new FileWriter("filename.txt");
+                FileWriter myWriter = new FileWriter("MultithreadPR/filename.txt");
                 myWriter.write(String.valueOf(collect));
                 myWriter.close();
                 System.out.println("Successfully wrote to the file.");
