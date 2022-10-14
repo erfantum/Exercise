@@ -15,8 +15,6 @@ public class Main {
                 .parallelStream()
                 .map(line -> line.split("[.]|[ ]|[?]|[!]|[\"]|[,]|\\n|[:]|[+]"))
                 .flatMap(Arrays::stream)
-                .filter(w -> w.matches("\\w+"))
-                .map(String::toLowerCase)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         try {
             FileWriter myWriter = new FileWriter("filename.txt");
