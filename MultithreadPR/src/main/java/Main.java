@@ -13,7 +13,7 @@ public class Main {
         Path filePath = Paths.get("joda.txt");
         Map<String, Long> collect = Files.readAllLines(filePath)
                 .parallelStream()
-                .map(line -> line.split("\\s+"))
+                .map(line -> line.split("[.]|[ ]|[?]|[!]|[\"]|[,]|\\n|[:]|[+]"))
                 .flatMap(Arrays::stream)
                 .filter(w -> w.matches("\\w+"))
                 .map(String::toLowerCase)
