@@ -17,6 +17,7 @@ public class Main {
                     .parallelStream()
                     .map(line -> line.split("[.]|[\\S+]|[?]|[!]|[\"]|[,]|\\n|[:]|[+]"))
                     .flatMap(Arrays::stream)
+                    .map(String::toLowerCase)
                     .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
             try {
