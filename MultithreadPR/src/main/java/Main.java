@@ -15,7 +15,7 @@ public class Main {
         try {
             collect = Files.readAllLines(filePath)
                     .parallelStream()
-                    .map(line -> line.split("[.]|[ ]|[?]|[!]|[\"]|[,]|\\n|[:]|[+]"))
+                    .map(line -> line.split("[.]|[\\S+]|[?]|[!]|[\"]|[,]|\\n|[:]|[+]"))
                     .flatMap(Arrays::stream)
                     .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
